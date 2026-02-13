@@ -6,23 +6,33 @@
 <style>
 body {
     margin:0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     text-align:center;
-    background: linear-gradient(to bottom, #ffc0cb, #6d0019);
-    color:white;
+    background: linear-gradient(180deg, #ffb6c1, #5c0011);
     overflow:hidden;
+    color:white;
 }
 
+/* Glitter title */
 h1 {
-    margin-top:100px;
-    font-size:3em;
+    margin-top:120px;
+    font-size:3.2em;
+    background: linear-gradient(45deg, #fff, #ff4d6d, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff4d6d; }
+    to { text-shadow: 0 0 25px #ffb6c1; }
 }
 
 button {
-    padding:15px 30px;
+    padding:15px 35px;
     font-size:18px;
     border:none;
-    border-radius:30px;
+    border-radius:40px;
     cursor:pointer;
     margin:20px;
     transition:0.3s;
@@ -31,12 +41,41 @@ button {
 #continueBtn {
     background:#8b0000;
     color:white;
+    box-shadow:0 0 15px #ff4d6d;
 }
 
 #exitBtn {
     background:#ff69b4;
     color:white;
     position:relative;
+}
+
+button:hover {
+    transform:scale(1.1);
+}
+
+/* Floating strawberries */
+.strawberry {
+    position:absolute;
+    font-size:25px;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    from {transform: translateY(100vh);}
+    to {transform: translateY(-10vh);}
+}
+
+/* Rose petals */
+.petal {
+    position:absolute;
+    font-size:20px;
+    animation: fall 10s linear infinite;
+}
+
+@keyframes fall {
+    from {transform: translateY(-10vh) rotate(0deg);}
+    to {transform: translateY(110vh) rotate(360deg);}
 }
 
 .popup {
@@ -54,11 +93,27 @@ button {
 
 #messagePage {
     display:none;
-    padding:50px;
+    padding:60px;
+}
+
+.messageCard {
+    background:rgba(0,0,0,0.4);
+    padding:40px;
+    border-radius:20px;
+    max-width:700px;
+    margin:auto;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 25px #ff4d6d;
+    animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
 }
 
 .cat {
-    width:120px;
+    width:130px;
     position:absolute;
 }
 
@@ -67,13 +122,9 @@ button {
 .cat3 { bottom:10%; left:10%; }
 .cat4 { bottom:15%; right:10%; }
 
-.fade {
-    animation: fadeIn 2s ease forwards;
-}
-
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
+canvas {
+    position:fixed;
+    pointer-events:none;
 }
 </style>
 </head>
@@ -91,12 +142,13 @@ button {
 
 <div class="popup" id="popup">
 <p id="popupText"></p>
-<img src="angrycat.jpg" width="200">
+<img src="angrycat.jpg" width="220">
 </div>
 
 <div id="messagePage">
-<h2 class="fade">Happy Valentine’s Day Shoonkey</h2>
-<p class="fade">
+<div class="messageCard">
+<h2>Happy Valentine’s Day Shoonkey</h2>
+<p>
 I know we’re not big on labels, and this aint the typical “Valentine’s Day” type. But I still wanted to take a second to say I appreciate you.
 <br><br>
 Distance isn’t always easy, and whatever this is that we have isn’t always simple either. But you make it feel steady. You make it feel natural. I don’t ever feel like I’m forcing anything with you, and that’s rare.
@@ -112,18 +164,38 @@ Just thank you, for being you, and for choosing to be here with me, even from mi
 — Lloyd
 </p>
 </div>
+</div>
 
 <audio id="romanticMusic" src="infatuated.mp3"></audio>
 <audio id="sadMusic" src="infatuated.mp3"></audio>
 
 <script>
 let exitClicks = 0;
-
 const exitBtn = document.getElementById("exitBtn");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popupText");
 const sadMusic = document.getElementById("sadMusic");
 const romanticMusic = document.getElementById("romanticMusic");
+
+/* Floating strawberries */
+for(let i=0;i<15;i++){
+    let s=document.createElement("div");
+    s.className="strawberry";
+    s.innerHTML="🍓";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(s);
+}
+
+/* Falling petals */
+for(let i=0;i<10;i++){
+    let p=document.createElement("div");
+    p.className="petal";
+    p.innerHTML="🌹";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(6+Math.random()*6)+"s";
+    document.body.appendChild(p);
+}
 
 exitBtn.addEventListener("click", function() {
     exitClicks++;
@@ -138,7 +210,7 @@ exitBtn.addEventListener("click", function() {
         popup.style.display = "block";
         setTimeout(()=>popup.style.display="none",1500);
     } 
-    else if (exitClicks === 3) {
+    else if (exitClicks <= 4) {
         exitBtn.style.position = "absolute";
         exitBtn.style.top = Math.random()*80 + "%";
         exitBtn.style.left = Math.random()*80 + "%";
