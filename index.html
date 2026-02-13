@@ -11,6 +11,7 @@ body {
     background: linear-gradient(180deg, #ffb6c1, #5c0011);
     overflow:hidden;
     color:white;
+    transition: background 2s;
 }
 
 /* Glitter title */
@@ -21,6 +22,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: glow 2s infinite alternate;
+    cursor:pointer;
 }
 
 @keyframes glow {
@@ -28,6 +30,7 @@ h1 {
     to { text-shadow: 0 0 25px #ffb6c1; }
 }
 
+/* Buttons */
 button {
     padding:15px 35px;
     font-size:18px;
@@ -78,24 +81,20 @@ button:hover {
     to {transform: translateY(110vh) rotate(360deg);}
 }
 
-.popup {
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    background:white;
-    color:#8b0000;
-    padding:30px;
-    border-radius:20px;
-    display:none;
-    z-index:1000;
+/* Heartbeat animation */
+@keyframes heartbeat {
+    0% { transform: scale(1);}
+    25% { transform: scale(1.2);}
+    50% { transform: scale(1);}
+    75% { transform: scale(1.2);}
+    100% { transform: scale(1);}
 }
 
-#messagePage {
-    display:none;
-    padding:60px;
+.heartBeat {
+    animation: heartbeat 1s infinite;
 }
 
+/* Message card */
 .messageCard {
     background:rgba(0,0,0,0.4);
     padding:40px;
@@ -107,6 +106,7 @@ button:hover {
     animation: fadeIn 2s ease forwards;
 }
 
+/* Fade in */
 @keyframes fadeIn {
     from {opacity:0;}
     to {opacity:1;}
@@ -126,11 +126,30 @@ canvas {
     position:fixed;
     pointer-events:none;
 }
+
+/* Hidden jasmine quote */
+#jasmineQuote {
+    display:none;
+    position:fixed;
+    bottom:5%;
+    right:5%;
+    font-size:18px;
+    background:rgba(255,255,255,0.6);
+    padding:10px 15px;
+    border-radius:10px;
+    color:#5c0011;
+    font-style:italic;
+}
 </style>
 </head>
 <body>
 
-<h1>Happy Valentine’s Day Shoonkey ❤️</h1>
+<!-- Fake loading screen -->
+<div id="loadingScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#5c0011;color:#ffb6c1;display:flex;align-items:center;justify-content:center;font-size:2em;z-index:2000;">
+Loading love... 💖
+</div>
+
+<h1 id="mainTitle" class="heartBeat">Happy Valentine’s Day Shoonkey ❤️</h1>
 
 <button id="continueBtn">Continue</button>
 <button id="exitBtn">Exit</button>
@@ -166,8 +185,13 @@ Just thank you, for being you, and for choosing to be here with me, even from mi
 </div>
 </div>
 
+<!-- Hidden jasmine quote -->
+<div id="jasmineQuote">“Jasmine blooms even in the quietest corners.” 🌼</div>
+
 <audio id="romanticMusic" src="infatuated.mp3"></audio>
 <audio id="sadMusic" src="infatuated.mp3"></audio>
+
+<canvas id="confetti"></canvas>
 
 <script>
 let exitClicks = 0;
@@ -176,6 +200,12 @@ const popup = document.getElementById("popup");
 const popupText = document.getElementById("popupText");
 const sadMusic = document.getElementById("sadMusic");
 const romanticMusic = document.getElementById("romanticMusic");
+const jasmineQuote = document.getElementById("jasmineQuote");
+const loadingScreen = document.getElementById("loadingScreen");
+const mainTitle = document.getElementById("mainTitle");
+
+/* Fake loading screen */
+setTimeout(()=>loadingScreen.style.display="none",2000);
 
 /* Floating strawberries */
 for(let i=0;i<15;i++){
@@ -197,9 +227,9 @@ for(let i=0;i<10;i++){
     document.body.appendChild(p);
 }
 
+/* Exit button chaos */
 exitBtn.addEventListener("click", function() {
     exitClicks++;
-
     if (exitClicks === 1) {
         popupText.innerText = "shoon...";
         popup.style.display = "block";
@@ -222,11 +252,83 @@ exitBtn.addEventListener("click", function() {
     }
 });
 
+/* Continue button */
 document.getElementById("continueBtn").addEventListener("click", function() {
     document.body.innerHTML = document.getElementById("messagePage").innerHTML;
     romanticMusic.play();
+    startConfetti();
 });
+
+/* Cat click easter egg */
+const cats = document.querySelectorAll(".cat");
+cats.forEach((cat,i)=>{
+    cat.addEventListener("click",()=>{
+        alert("Meow! You found a secret cat! 🐱");
+        jasmineQuote.style.display="block";
+        setTimeout(()=>jasmineQuote.style.display="none",4000);
+    });
+});
+
+/* Confetti for strawberries when continue is pressed */
+function startConfetti() {
+    const canvas = document.getElementById('confetti');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    const confetti = [];
+    for(let i=0;i<150;i++){
+        confetti.push({
+            x:Math.random()*canvas.width,
+            y:Math.random()*canvas.height,
+            r:Math.random()*6+4,
+            d:Math.random()*150+50,
+            color:`hsl(${Math.random()*360},100%,75%)`,
+            tilt:Math.random()*10-10,
+            tiltAngleIncremental:Math.random()*0.07+0.05
+        });
+    }
+    function draw(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        confetti.forEach((c)=>{
+            ctx.beginPath();
+            ctx.lineWidth = c.r/2;
+            ctx.strokeStyle = c.color;
+            ctx.moveTo(c.x + c.tilt + c.r/4, c.y);
+            ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r/2);
+            ctx.stroke();
+        });
+        update();
+    }
+    function update(){
+        confetti.forEach((c,i)=>{
+            c.tiltAngle += c.tiltAngleIncremental;
+            c.y += (Math.cos(c.d) + 3 + c.r/2)/2;
+            c.tilt = Math.sin(c.tiltAngle) * 15;
+            if(c.y > canvas.height){ c.y = -10; c.x = Math.random()*canvas.width;}
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+/* Durian easter egg: click title 3 times */
+let titleClicks = 0;
+mainTitle.addEventListener("click", ()=>{
+    titleClicks++;
+    if(titleClicks===3){
+        alert("You found the durian 🥭💀");
+        mainTitle.innerText="💖💀💖💀💖";
+    }
+});
+
+/* Wine red night mode toggle every 10s for chaotic effect */
+setInterval(()=>{
+    document.body.style.background = document.body.style.background.includes('#5c0011')?
+        'linear-gradient(180deg,#330011,#ffb6c1)':
+        'linear-gradient(180deg,#ffb6c1,#5c0011)';
+},10000);
 </script>
 
 </body>
 </html>
+z
