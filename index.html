@@ -1,226 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Happy Valentine's Day Shoonkey</title>
+<title>For Shoonkey ❤️</title>
+
 <style>
-/* GENERAL STYLES */
-body {
+body{
     margin:0;
     font-family: 'Segoe UI', sans-serif;
+    background:#ffc1cc;
     text-align:center;
-    background: #ffb6c1; /* baby pink */
-    color:white;
+    color:#5a0010;
     overflow:hidden;
 }
 
-/* GLITTERY TITLE */
-h1 {
-    margin-top:100px;
+.slide{
+    display:none;
+    padding:60px 20px;
+}
+
+.active{
+    display:block;
+}
+
+h1{
     font-size:3em;
-    background: linear-gradient(45deg, #fff, #ff4d6d, #fff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: glitter 2s infinite alternate;
+    background: linear-gradient(45deg,#fff,#ff4d6d,#fff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:glow 2s infinite alternate;
 }
 
-@keyframes glitter {
-    from { text-shadow: 0 0 5px #ffb6c1, 0 0 10px #ff4d6d; }
-    to { text-shadow: 0 0 15px #ffb6c1, 0 0 25px #ff4d6d; }
+@keyframes glow{
+    from{ text-shadow:0 0 5px #ff9bb3;}
+    to{ text-shadow:0 0 20px #ff4d6d;}
 }
 
-/* BUTTONS */
-button {
-    padding: 12px 30px;
-    font-size:18px;
+button{
+    padding:12px 28px;
+    margin:15px;
     border:none;
-    border-radius:40px;
+    border-radius:30px;
+    font-size:16px;
     cursor:pointer;
-    margin:20px;
-    transition:0.3s;
+    transition:0.3s ease;
 }
 
-#continueBtn {
+button:hover{
+    transform:scale(1.05);
+}
+
+#nextBtn{
     background:#8b0000;
     color:white;
-    box-shadow:0 0 10px #ff4d6d;
 }
 
-#exitBtn {
+#exitBtn{
     background:#ff69b4;
     color:white;
-    box-shadow:0 0 10px #ffb6c1;
 }
 
-/* FLOATING FRUITS & PETALS */
-.floating {
-    position:absolute;
-    font-size:25px;
-    animation: float linear infinite;
-}
-
-@keyframes float {
-    from {transform: translateY(100vh);}
-    to {transform: translateY(-10vh);}
-}
-
-/* MESSAGE CARD */
-.messageCard {
-    display:none;
-    background: rgba(0,0,0,0.5);
-    padding: 40px;
-    border-radius: 20px;
-    max-width:700px;
-    margin: 50px auto;
-    text-align:left;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 25px #ff4d6d;
-    color:white;
-    font-size:16px;
-    line-height:1.6em;
-}
-
-/* CAT MEMES */
-.cat {
-    width:120px;
-    position:absolute;
-    cursor:pointer;
-}
-
-/* POPUP */
-#popup {
-    display:none;
-    position:fixed;
-    top:40%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    background: rgba(0,0,0,0.7);
-    color:white;
-    padding:20px;
+img{
+    max-width:250px;
     border-radius:15px;
-    text-align:center;
+    margin:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* HIDDEN JASMINE QUOTE */
-#jasmineQuote {
-    display:none;
-    position:fixed;
-    bottom:5%;
-    right:5%;
-    font-size:18px;
-    background:rgba(255,255,255,0.6);
-    padding:10px 15px;
-    border-radius:10px;
-    color:#5c0011;
-    font-style:italic;
+.messageCard{
+    max-width:700px;
+    margin:30px auto;
+    background:rgba(255,255,255,0.7);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    line-height:1.7em;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+.floating{
+    position:absolute;
+    font-size:24px;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
 }
 </style>
 </head>
+
 <body>
 
-<h1 id="mainTitle">Happy Valentine’s Day Shoonkey ❤️</h1>
-
-<button id="continueBtn">Continue</button>
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide1">
+<h1>Happy Valentine’s Day Shoonkey ❤️</h1>
+<button id="nextBtn">Yes</button>
 <button id="exitBtn">Exit</button>
-
-<!-- CAT MEMES -->
-<img src="cat1.jpg" class="cat" style="top:10%; left:5%;">
-<img src="cat2.jpg" class="cat" style="top:20%; right:5%;">
-<img src="cat3.jpg" class="cat" style="bottom:10%; left:10%;">
-<img src="cat4.jpg" class="cat" style="bottom:15%; right:10%;">
-
-<!-- POPUP -->
-<div id="popup">
-  <p id="popupText" style="font-size:18px;"></p>
-  <img id="popupCat" src="angrycat.jpg" style="width:180px; display:none; margin-top:10px;">
 </div>
 
-<!-- HIDDEN JASMINE QUOTE -->
-<div id="jasmineQuote">“Jasmine blooms even in the quietest corners.” 🌼</div>
+<!-- SLIDE 2 -->
+<div class="slide" id="slide2">
+<img src="bouquet.jpg">
+<p>Flowers for m’lady.</p>
+<p>I got you roses and jasmine since I know you love them.</p>
+<button onclick="nextSlide()">Next</button>
+</div>
 
-<!-- MESSAGE CARD -->
-<div class="messageCard" id="messageCard">
-<h2>Happy Valentine’s Day Shoonkey</h2>
+<!-- SLIDE 3 -->
+<div class="slide" id="slide3">
+<p>Wanna buy some fruits?</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide4">
+<img src="strawberry.jpg">
+<img src="mango.jpg">
+<img src="durian.jpg">
+<p>Here, I bought you strawberries, mangoes, and durian.</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide5">
+<p>Wanna watch some Netflix?</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide6">
+<img src="loveprism.jpg">
+<p>Oh, didn’t you say you love this anime? What a coincidence!</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide7">
+<p>I’m hungry. Wanna eat?</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide8">
+<img src="burmesecurry.jpg">
+<p>I made you some Burmese curry since that’s your favorite, right?</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 9 -->
+<div class="slide" id="slide9">
+<p>Oh… one more thing.</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 10 FINAL -->
+<div class="slide" id="slide10">
+<div class="messageCard">
+<h2>Happy Valentine’s Day Shoonie<3</h2>
 <p>
-I know we’re not big on labels, and this aint the typical “Valentine’s Day” type. But I still wanted to take a second to say I appreciate you.<br><br>
-Distance isn’t always easy, and whatever this is that we have isn’t always simple either. But you make it feel steady. You make it feel natural. I don’t ever feel like I’m forcing anything with you, and that’s rare.<br><br>
+I know we’re not big on labels, and this isn’t the typical “Valentine’s Day” type of thing. But I still wanted to take a moment to tell you how much I appreciate you.<br><br>
+
+Distance isn’t always easy, and whatever this is that we have isn’t always simple either. But you make it feel steady. You make it feel natural. I never feel like I’m forcing anything with you, and that’s rare.<br><br>
+
 I appreciate how you show up. How you listen. How you care in quiet ways. How you’re patient with me. You don’t make things dramatic. You just… stay. And that means more than you probably realize.<br><br>
-You’ve become a constant in my days. Not loud, not overwhelming, just solid. And I’m grateful for that.<br><br>
+
+You’ve become a constant in my days. Not loud, not overwhelming — just solid. And I’m grateful for that.<br><br>
+
 So yeah. No big speeches. No cheesy lines.<br><br>
-Just thank you, for being you, and for choosing to be here with me, even from miles away.<br><br>
+
+Just thank you for being you, and for choosing to be here with me, even from miles away.<br><br>
+
 — Lloyd
 </p>
 </div>
+</div>
 
-<audio id="romanticMusic" src="infatuated.mp3"></audio>
+<audio id="song1" src="hotlinebling.mp3"></audio>
+<audio id="song2" src="infatuated.mp3"></audio>
 
 <script>
-let slide = 1;
-const mainTitle = document.getElementById('mainTitle');
-const continueBtn = document.getElementById('continueBtn');
-const exitBtn = document.getElementById('exitBtn');
-const popup = document.getElementById('popup');
-const popupText = document.getElementById('popupText');
-const popupCat = document.getElementById('popupCat');
-const messageCard = document.getElementById('messageCard');
-const cats = document.querySelectorAll('.cat');
-const jasmineQuote = document.getElementById('jasmineQuote');
-const romanticMusic = document.getElementById('romanticMusic');
+let current=1;
+let exitClicks=0;
 
-function createFloatingFruit(emoji){
-    let f = document.createElement('div');
-    f.className = 'floating';
-    f.innerText = emoji;
-    f.style.left = Math.random()*100+'vw';
-    f.style.animationDuration = (5+Math.random()*5)+'s';
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),8000);
+const nextBtn=document.getElementById("nextBtn");
+const exitBtn=document.getElementById("exitBtn");
+
+function showSlide(n){
+    document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
+    document.getElementById("slide"+n).classList.add("active");
 }
 
-// EXIT BUTTON BEHAVIOR (multi-slide)
-exitBtn.addEventListener('click', ()=>{
-    slide++;
-    if(slide===2){
-        popupText.innerText = "shoon…";
-        popupCat.style.display = "block";
-        popup.style.display = "block";
-        continueBtn.style.transform = "scale(1.1)";
-    } else if(slide===3){
-        popupText.innerText = "at least look at it…";
-        popupCat.style.display = "block";
-        popup.style.display = "block";
-        continueBtn.style.transform = "scale(1.2)";
-    } else if(slide===4){
-        popupText.innerText = "beach go back right now!";
-        popupCat.style.display = "block";
-        popup.style.display = "block";
-        exitBtn.style.display = "none"; // remove exit button
-        continueBtn.style.transform = "scale(1.3)";
-    }
-    setTimeout(()=>popup.style.display='none',2000);
-});
+function nextSlide(){
+    current++;
+    showSlide(current);
 
-// CONTINUE BUTTON
-continueBtn.addEventListener('click', ()=>{
-    if(slide===1 || slide===4){
-        messageCard.style.display='block';
-        romanticMusic.play();
-        // floating strawberries, mango, roses
-        for(let i=0;i<15;i++){
-            let e = ['🍓','🥭','🌹'][Math.floor(Math.random()*3)];
-            createFloatingFruit(e);
-        }
-    }
-});
+    if(current===10){
+        document.getElementById("song1").play();
+        setTimeout(()=>{
+            document.getElementById("song1").pause();
+            document.getElementById("song2").play();
+        },15000);
 
-// CAT EASTER EGGS
-cats.forEach(cat=>{
-    cat.addEventListener('click', ()=>{
-        jasmineQuote.style.display='block';
-        setTimeout(()=>jasmineQuote.style.display='none',4000);
-        alert("Meow! You found a secret cat! 🐱");
-    });
-});
+        floatingFruits();
+    }
+}
+
+nextBtn.onclick=nextSlide;
+
+exitBtn.onclick=function(){
+    exitClicks++;
+    if(exitClicks===3){
+        exitBtn.style.display="none";
+    }
+}
+
+function floatingFruits(){
+    for(let i=0;i<25;i++){
+        let e=['🍓','🥭','🌹'][Math.floor(Math.random()*3)];
+        let f=document.createElement("div");
+        f.className="floating";
+        f.innerText=e;
+        f.style.left=Math.random()*100+"vw";
+        f.style.animationDuration=(5+Math.random()*5)+"s";
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),8000);
+    }
+}
 </script>
 
 </body>
