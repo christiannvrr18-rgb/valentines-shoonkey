@@ -29,25 +29,25 @@ body{
 }
 
 h1{
-  font-size:48px;
+  font-size:60px; /* bigger */
   color:#7b001c; /* dark wine red */
   margin-bottom:20px;
 }
 
 h2{
-  font-size:36px;
+  font-size:46px; /* bigger */
 }
 
 p{
-  font-size:26px;
+  font-size:28px; /* bigger */
   max-width:700px;
-  margin:auto 0 20px;
+  margin:auto;
   line-height:1.6;
 }
 
 button{
   padding:14px 28px;
-  font-size:20px;
+  font-size:22px; /* slightly bigger */
   border:none;
   border-radius:30px;
   margin:15px;
@@ -86,11 +86,6 @@ button{
   from{background-position:0 0;}
   to{background-position:200px 200px;}
 }
-
-img{
-  border-radius:15px;
-  margin-bottom:15px;
-}
 </style>
 </head>
 
@@ -111,7 +106,7 @@ img{
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 2: Flowers -->
+<!-- SLIDE 2 -->
 <div class="slide">
   <h2>Flowers for m’lady 🌹</h2>
   <p>I got you roses and jasmines since I know you love them.</p>
@@ -122,7 +117,7 @@ img{
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 3: Fruits -->
+<!-- SLIDE 3 -->
 <div class="slide">
   <h2>Wanna buy some fruits? 🍓🥭</h2>
   <p>Here, I bought you strawberries, mangoes, and durian.</p>
@@ -135,22 +130,22 @@ img{
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 4: Anime/Netflix -->
+<!-- SLIDE 4 -->
 <div class="slide">
-  <h2>Let's watch something 🎬</h2>
+  <h2>Let’s watch something 🎬</h2>
+  <p>Didn’t you say you love this anime? What a coincidence!</p>
   <img src="love_through_prism.jpg" width="300">
-  <p>Didn't you say you love this anime? What a coincidence!</p>
   <img class="cat" src="cat4.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 5: Burmese Curry -->
+<!-- SLIDE 5 -->
 <div class="slide">
   <h2>I’m hungry… wanna eat? 🍛</h2>
-  <img src="burmese_curry.jpg" width="300">
   <p>I made you some Burmese curry since that’s your favorite, right?</p>
+  <img src="burmese_curry.jpg" width="300">
   <img class="cat" src="cat5.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
@@ -170,7 +165,7 @@ img{
 <div class="slide">
   <h2>Happy Valentine’s Day my Shoonie ❤️</h2>
   <p>
-  I know this isn’t the typical “Valentine’s Day” situation.  
+  I know this isn’t the typical “Valentine’s Day” gift.  
   But I still wanted to take a moment to tell you how much I appreciate you.  
 
   Distance isn’t always easy, and whatever this is that we have isn’t always simple either.  
@@ -198,7 +193,7 @@ img{
 
   Happy Valentine’s Day.  
 
-  – The GOAT Lalloyd
+  – the GOAT Lalloyd
   </p>
   <img class="cat" src="cat7.jpg">
 </div>
@@ -212,7 +207,7 @@ let exitButtons = document.querySelectorAll(".exit");
 let music = document.getElementById("bgMusic");
 let musicStarted = false;
 
-// start Hotline Bling on first click
+// start Hotline Bling on first interaction
 function startMusic(){
   if(!musicStarted){
     music.play();
@@ -232,13 +227,13 @@ function finalSlide(){
   currentSlide++;
   slides[currentSlide].classList.add("active");
 
-  // switch to Infatuated on final slide
   music.src="infatuated.mp3";
   music.play();
 }
 
 function exitPressed(){
   startMusic();
+
   exitCount++;
 
   if(exitCount==1){
