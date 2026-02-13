@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine's Day Shoonkey</title>
+<style>
+body {
+    margin:0;
+    font-family: 'Arial', sans-serif;
+    text-align:center;
+    background: linear-gradient(to bottom, #ffc0cb, #6d0019);
+    color:white;
+    overflow:hidden;
+}
+
+h1 {
+    margin-top:100px;
+    font-size:3em;
+}
+
+button {
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:20px;
+    transition:0.3s;
+}
+
+#continueBtn {
+    background:#8b0000;
+    color:white;
+}
+
+#exitBtn {
+    background:#ff69b4;
+    color:white;
+    position:relative;
+}
+
+.popup {
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background:white;
+    color:#8b0000;
+    padding:30px;
+    border-radius:20px;
+    display:none;
+    z-index:1000;
+}
+
+#messagePage {
+    display:none;
+    padding:50px;
+}
+
+.cat {
+    width:120px;
+    position:absolute;
+}
+
+.cat1 { top:10%; left:5%; }
+.cat2 { top:20%; right:5%; }
+.cat3 { bottom:10%; left:10%; }
+.cat4 { bottom:15%; right:10%; }
+
+.fade {
+    animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<h1>Happy Valentine’s Day Shoonkey ❤️</h1>
+
+<button id="continueBtn">Continue</button>
+<button id="exitBtn">Exit</button>
+
+<img src="cat1.jpg" class="cat cat1">
+<img src="cat2.jpg" class="cat cat2">
+<img src="cat3.jpg" class="cat cat3">
+<img src="cat4.jpg" class="cat cat4">
+
+<div class="popup" id="popup">
+<p id="popupText"></p>
+<img src="angrycat.jpg" width="200">
+</div>
+
+<div id="messagePage">
+<h2 class="fade">Happy Valentine’s Day Shoonkey</h2>
+<p class="fade">
+I know we’re not big on labels, and this aint the typical “Valentine’s Day” type. But I still wanted to take a second to say I appreciate you.
+<br><br>
+Distance isn’t always easy, and whatever this is that we have isn’t always simple either. But you make it feel steady. You make it feel natural. I don’t ever feel like I’m forcing anything with you, and that’s rare.
+<br><br>
+I appreciate how you show up. How you listen. How you care in quiet ways. How you’re patient with me. You don’t make things dramatic. You just… stay. And that means more than you probably realize.
+<br><br>
+You’ve become a constant in my days. Not loud, not overwhelming, just solid. And I’m grateful for that.
+<br><br>
+So yeah. No big speeches. No cheesy lines.
+<br><br>
+Just thank you, for being you, and for choosing to be here with me, even from miles away.
+<br><br>
+— Lloyd
+</p>
+</div>
+
+<audio id="romanticMusic" src="infatuated.mp3"></audio>
+<audio id="sadMusic" src="infatuated.mp3"></audio>
+
+<script>
+let exitClicks = 0;
+
+const exitBtn = document.getElementById("exitBtn");
+const popup = document.getElementById("popup");
+const popupText = document.getElementById("popupText");
+const sadMusic = document.getElementById("sadMusic");
+const romanticMusic = document.getElementById("romanticMusic");
+
+exitBtn.addEventListener("click", function() {
+    exitClicks++;
+
+    if (exitClicks === 1) {
+        popupText.innerText = "shoon...";
+        popup.style.display = "block";
+        setTimeout(()=>popup.style.display="none",1500);
+    } 
+    else if (exitClicks === 2) {
+        popupText.innerText = "at least look at it...";
+        popup.style.display = "block";
+        setTimeout(()=>popup.style.display="none",1500);
+    } 
+    else if (exitClicks === 3) {
+        exitBtn.style.position = "absolute";
+        exitBtn.style.top = Math.random()*80 + "%";
+        exitBtn.style.left = Math.random()*80 + "%";
+    }
+    else {
+        popupText.innerText = "beach go back right now!";
+        popup.style.display = "block";
+        sadMusic.play();
+    }
+});
+
+document.getElementById("continueBtn").addEventListener("click", function() {
+    document.body.innerHTML = document.getElementById("messagePage").innerHTML;
+    romanticMusic.play();
+});
+</script>
+
+</body>
+</html>
