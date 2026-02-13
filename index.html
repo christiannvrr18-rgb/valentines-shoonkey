@@ -104,6 +104,7 @@ button:hover {
     backdrop-filter:blur(10px);
     box-shadow:0 0 25px #ff4d6d;
     animation: fadeIn 2s ease forwards;
+    text-shadow:0 0 8px #ff4d6d;
 }
 
 /* Fade in */
@@ -122,8 +123,12 @@ button:hover {
 .cat3 { bottom:10%; left:10%; }
 .cat4 { bottom:15%; right:10%; }
 
-canvas {
+.canvas-container {
     position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
     pointer-events:none;
 }
 
@@ -140,6 +145,19 @@ canvas {
     color:#5c0011;
     font-style:italic;
 }
+
+/* Cat dance animation */
+@keyframes catDance {
+    0% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(-15deg); }
+    50% { transform: translateY(0) rotate(15deg); }
+    75% { transform: translateY(-10px) rotate(-15deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.catDance {
+    animation: catDance 1s infinite;
+}
 </style>
 </head>
 <body>
@@ -154,10 +172,10 @@ Loading love... 💖
 <button id="continueBtn">Continue</button>
 <button id="exitBtn">Exit</button>
 
-<img src="cat1.jpg" class="cat cat1">
-<img src="cat2.jpg" class="cat cat2">
-<img src="cat3.jpg" class="cat cat3">
-<img src="cat4.jpg" class="cat cat4">
+<img src="cat1.jpg" class="cat cat1 catDance">
+<img src="cat2.jpg" class="cat cat2 catDance">
+<img src="cat3.jpg" class="cat cat3 catDance">
+<img src="cat4.jpg" class="cat cat4 catDance">
 
 <div class="popup" id="popup">
 <p id="popupText"></p>
@@ -227,27 +245,24 @@ for(let i=0;i<10;i++){
     document.body.appendChild(p);
 }
 
-/* Exit button chaos */
+/* Exit button chaos + heartbeat sync */
 exitBtn.addEventListener("click", function() {
     exitClicks++;
-    if (exitClicks === 1) {
-        popupText.innerText = "shoon...";
-        popup.style.display = "block";
+    if(exitClicks <=2){
+        popupText.innerText = exitClicks===1?"shoon...":"at least look at it...";
+        popup.style.display="block";
         setTimeout(()=>popup.style.display="none",1500);
-    } 
-    else if (exitClicks === 2) {
-        popupText.innerText = "at least look at it...";
-        popup.style.display = "block";
-        setTimeout(()=>popup.style.display="none",1500);
-    } 
-    else if (exitClicks <= 4) {
-        exitBtn.style.position = "absolute";
-        exitBtn.style.top = Math.random()*80 + "%";
-        exitBtn.style.left = Math.random()*80 + "%";
     }
-    else {
-        popupText.innerText = "beach go back right now!";
-        popup.style.display = "block";
+    else if(exitClicks <=4){
+        exitBtn.style.position="absolute";
+        exitBtn.style.top=Math.random()*80 + "%";
+        exitBtn.style.left=Math.random()*80 + "%";
+        document.body.style.animation="heartbeat 0.5s infinite";
+        sadMusic.play();
+    }
+    else{
+        popupText.innerText="beach go back right now!";
+        popup.style.display="block";
         sadMusic.play();
     }
 });
@@ -257,11 +272,12 @@ document.getElementById("continueBtn").addEventListener("click", function() {
     document.body.innerHTML = document.getElementById("messagePage").innerHTML;
     romanticMusic.play();
     startConfetti();
+    strawberryDurianRain();
 });
 
 /* Cat click easter egg */
 const cats = document.querySelectorAll(".cat");
-cats.forEach((cat,i)=>{
+cats.forEach((cat)=>{
     cat.addEventListener("click",()=>{
         alert("Meow! You found a secret cat! 🐱");
         jasmineQuote.style.display="block";
@@ -269,7 +285,7 @@ cats.forEach((cat,i)=>{
     });
 });
 
-/* Confetti for strawberries when continue is pressed */
+/* Confetti for strawberries */
 function startConfetti() {
     const canvas = document.getElementById('confetti');
     canvas.width = window.innerWidth;
@@ -300,7 +316,7 @@ function startConfetti() {
         update();
     }
     function update(){
-        confetti.forEach((c,i)=>{
+        confetti.forEach((c)=>{
             c.tiltAngle += c.tiltAngleIncremental;
             c.y += (Math.cos(c.d) + 3 + c.r/2)/2;
             c.tilt = Math.sin(c.tiltAngle) * 15;
@@ -311,8 +327,23 @@ function startConfetti() {
     draw();
 }
 
+/* Strawberry + durian rain */
+function strawberryDurianRain(){
+    for(let i=0;i<30;i++){
+        let s=document.createElement("div");
+        s.className="strawberry";
+        s.style.left=Math.random()*100+"vw";
+        s.style.top="-5vh";
+        s.innerHTML=Math.random()<0.7?"🍓":"🥭";
+        s.style.fontSize=(20+Math.random()*20)+"px";
+        s.style.animation="float 5s linear forwards";
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),6000);
+    }
+}
+
 /* Durian easter egg: click title 3 times */
-let titleClicks = 0;
+let titleClicks=0;
 mainTitle.addEventListener("click", ()=>{
     titleClicks++;
     if(titleClicks===3){
@@ -331,4 +362,3 @@ setInterval(()=>{
 
 </body>
 </html>
-z
