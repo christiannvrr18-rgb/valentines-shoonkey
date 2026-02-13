@@ -35,13 +35,13 @@ h1{
 }
 
 h2{
-  font-size:34px;
+  font-size:36px;
 }
 
 p{
-  font-size:22px;
+  font-size:26px;
   max-width:700px;
-  margin:auto;
+  margin:auto 0 20px;
   line-height:1.6;
 }
 
@@ -86,6 +86,11 @@ button{
   from{background-position:0 0;}
   to{background-position:200px 200px;}
 }
+
+img{
+  border-radius:15px;
+  margin-bottom:15px;
+}
 </style>
 </head>
 
@@ -106,7 +111,7 @@ button{
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 2 -->
+<!-- SLIDE 2: Flowers -->
 <div class="slide">
   <h2>Flowers for m’lady 🌹</h2>
   <p>I got you roses and jasmines since I know you love them.</p>
@@ -117,7 +122,7 @@ button{
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 3 -->
+<!-- SLIDE 3: Fruits -->
 <div class="slide">
   <h2>Wanna buy some fruits? 🍓🥭</h2>
   <p>Here, I bought you strawberries, mangoes, and durian.</p>
@@ -130,22 +135,22 @@ button{
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 4 -->
+<!-- SLIDE 4: Anime/Netflix -->
 <div class="slide">
-  <h2>Oh, didn’t you say you love this anime? 🎬</h2>
-  <p>What a coincidence!</p>
+  <h2>Let's watch something 🎬</h2>
   <img src="love_through_prism.jpg" width="300">
+  <p>Didn't you say you love this anime? What a coincidence!</p>
   <img class="cat" src="cat4.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
   <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 5 -->
+<!-- SLIDE 5: Burmese Curry -->
 <div class="slide">
   <h2>I’m hungry… wanna eat? 🍛</h2>
-  <p>I made you some Burmese curry since that’s your favorite, right?</p>
   <img src="burmese_curry.jpg" width="300">
+  <p>I made you some Burmese curry since that’s your favorite, right?</p>
   <img class="cat" src="cat5.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
@@ -163,15 +168,15 @@ button{
 
 <!-- FINAL MESSAGE -->
 <div class="slide">
-  <h2>Happy Valentine’s Day Shoonkey ❤️</h2>
+  <h2>Happy Valentine’s Day my Shoonie ❤️</h2>
   <p>
-  I know we’re not big on labels, and this isn’t the typical “Valentine’s Day” situation.  
+  I know this isn’t the typical “Valentine’s Day” situation.  
   But I still wanted to take a moment to tell you how much I appreciate you.  
 
   Distance isn’t always easy, and whatever this is that we have isn’t always simple either.  
   But you make it feel steady. You make it feel natural.  
 
-  I never feel like I’m forcing anything with you — and that’s rare.  
+  I never feel like I’m forcing anything with you, and that’s rare.  
 
   I appreciate how you show up. How you listen.  
   How you care in quiet ways.  
@@ -187,13 +192,13 @@ button{
 
   So yeah. No big speeches. No cheesy lines.  
 
-  Just thank you — for being you,  
+  Just thank you, for being you,  
   and for choosing to be here with me,  
   even from miles away.  
 
   Happy Valentine’s Day.  
 
-  – Lloyd
+  – The GOAT Lalloyd
   </p>
   <img class="cat" src="cat7.jpg">
 </div>
@@ -207,7 +212,7 @@ let exitButtons = document.querySelectorAll(".exit");
 let music = document.getElementById("bgMusic");
 let musicStarted = false;
 
-// start Hotline Bling on first interaction
+// start Hotline Bling on first click
 function startMusic(){
   if(!musicStarted){
     music.play();
@@ -227,13 +232,13 @@ function finalSlide(){
   currentSlide++;
   slides[currentSlide].classList.add("active");
 
+  // switch to Infatuated on final slide
   music.src="infatuated.mp3";
   music.play();
 }
 
 function exitPressed(){
   startMusic();
-
   exitCount++;
 
   if(exitCount==1){
