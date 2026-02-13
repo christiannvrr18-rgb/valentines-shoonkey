@@ -30,7 +30,8 @@ body{
 
 h1{
   font-size:48px;
-  color:#7b001c;
+  color:#7b001c; /* dark wine red */
+  margin-bottom:20px;
 }
 
 h2{
@@ -92,7 +93,9 @@ button{
 
 <div class="glitter"></div>
 
-<audio id="bgMusic" src="hotline.mp3" autoplay loop></audio>
+<audio id="bgMusic" loop>
+  <source src="hotline.mp3" type="audio/mpeg">
+</audio>
 
 <!-- SLIDE 1 -->
 <div class="slide active">
@@ -202,8 +205,18 @@ let slides = document.querySelectorAll(".slide");
 let nextButtons = document.querySelectorAll(".next");
 let exitButtons = document.querySelectorAll(".exit");
 let music = document.getElementById("bgMusic");
+let musicStarted = false;
+
+// start Hotline Bling on first interaction
+function startMusic(){
+  if(!musicStarted){
+    music.play();
+    musicStarted = true;
+  }
+}
 
 function nextSlide(){
+  startMusic();
   slides[currentSlide].classList.remove("active");
   currentSlide++;
   slides[currentSlide].classList.add("active");
@@ -219,15 +232,15 @@ function finalSlide(){
 }
 
 function exitPressed(){
+  startMusic();
+
   exitCount++;
 
-  alert("Shoon...");
-
-  if(exitCount==2){
+  if(exitCount==1){
+    alert("Shoon...");
+  } else if(exitCount==2){
     alert("At least look at it...");
-  }
-
-  if(exitCount>=3){
+  } else if(exitCount>=3){
     alert("Beach please go back right now 😾");
     exitButtons.forEach(btn=>btn.style.display="none");
   }
