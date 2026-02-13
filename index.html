@@ -1,38 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Happy Valentine's Day Shoonkey</title>
 <style>
+/* GENERAL STYLES */
 body {
     margin:0;
     font-family: 'Segoe UI', sans-serif;
     text-align:center;
     background: linear-gradient(180deg, #ffb6c1, #5c0011);
-    overflow:hidden;
     color:white;
-    transition: background 2s;
+    overflow:hidden;
 }
 
-/* Glitter title */
+/* GLITTERY TITLE */
 h1 {
-    margin-top:120px;
-    font-size:3.2em;
+    margin-top:100px;
+    font-size:3em;
     background: linear-gradient(45deg, #fff, #ff4d6d, #fff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: glow 2s infinite alternate;
-    cursor:pointer;
+    animation: glitter 2s infinite alternate;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 10px #ff4d6d; }
-    to { text-shadow: 0 0 25px #ffb6c1; }
+@keyframes glitter {
+    from { text-shadow: 0 0 5px #ffb6c1, 0 0 10px #ff4d6d; }
+    to { text-shadow: 0 0 15px #ffb6c1, 0 0 25px #ff4d6d; }
 }
 
-/* Buttons */
+/* BUTTONS */
 button {
-    padding:15px 35px;
+    padding: 12px 30px;
     font-size:18px;
     border:none;
     border-radius:40px;
@@ -44,24 +43,21 @@ button {
 #continueBtn {
     background:#8b0000;
     color:white;
-    box-shadow:0 0 15px #ff4d6d;
+    box-shadow:0 0 10px #ff4d6d;
 }
 
 #exitBtn {
     background:#ff69b4;
     color:white;
     position:relative;
+    box-shadow:0 0 10px #ffb6c1;
 }
 
-button:hover {
-    transform:scale(1.1);
-}
-
-/* Floating strawberries */
-.strawberry {
+/* FLOATING FRUITS & PETALS */
+.floating {
     position:absolute;
     font-size:25px;
-    animation: float 8s linear infinite;
+    animation: float linear infinite;
 }
 
 @keyframes float {
@@ -69,70 +65,30 @@ button:hover {
     to {transform: translateY(-10vh);}
 }
 
-/* Rose petals */
-.petal {
-    position:absolute;
-    font-size:20px;
-    animation: fall 10s linear infinite;
-}
-
-@keyframes fall {
-    from {transform: translateY(-10vh) rotate(0deg);}
-    to {transform: translateY(110vh) rotate(360deg);}
-}
-
-/* Heartbeat animation */
-@keyframes heartbeat {
-    0% { transform: scale(1);}
-    25% { transform: scale(1.2);}
-    50% { transform: scale(1);}
-    75% { transform: scale(1.2);}
-    100% { transform: scale(1);}
-}
-
-.heartBeat {
-    animation: heartbeat 1s infinite;
-}
-
-/* Message card */
+/* MESSAGE CARD */
 .messageCard {
-    background:rgba(0,0,0,0.4);
-    padding:40px;
-    border-radius:20px;
+    display:none;
+    background: rgba(0,0,0,0.5);
+    padding: 40px;
+    border-radius: 20px;
     max-width:700px;
-    margin:auto;
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 25px #ff4d6d;
-    animation: fadeIn 2s ease forwards;
-    text-shadow:0 0 8px #ff4d6d;
+    margin: 50px auto;
+    text-align:left;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 25px #ff4d6d;
+    color:white;
+    font-size:16px;
+    line-height:1.6em;
 }
 
-/* Fade in */
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
-}
-
+/* CAT MEMES */
 .cat {
-    width:130px;
+    width:120px;
     position:absolute;
+    cursor:pointer;
 }
 
-.cat1 { top:10%; left:5%; }
-.cat2 { top:20%; right:5%; }
-.cat3 { bottom:10%; left:10%; }
-.cat4 { bottom:15%; right:10%; }
-
-.canvas-container {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-}
-
-/* Hidden jasmine quote */
+/* HIDDEN JASMINE QUOTE */
 #jasmineQuote {
     display:none;
     position:fixed;
@@ -145,219 +101,113 @@ button:hover {
     color:#5c0011;
     font-style:italic;
 }
-
-/* Cat dance animation */
-@keyframes catDance {
-    0% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-10px) rotate(-15deg); }
-    50% { transform: translateY(0) rotate(15deg); }
-    75% { transform: translateY(-10px) rotate(-15deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-}
-
-.catDance {
-    animation: catDance 1s infinite;
-}
 </style>
 </head>
 <body>
 
-<!-- Fake loading screen -->
-<div id="loadingScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#5c0011;color:#ffb6c1;display:flex;align-items:center;justify-content:center;font-size:2em;z-index:2000;">
-Loading love... 💖
-</div>
-
-<h1 id="mainTitle" class="heartBeat">Happy Valentine’s Day Shoonkey ❤️</h1>
+<h1 id="mainTitle">Happy Valentine’s Day Shoonkey ❤️</h1>
 
 <button id="continueBtn">Continue</button>
 <button id="exitBtn">Exit</button>
 
-<img src="cat1.jpg" class="cat cat1 catDance">
-<img src="cat2.jpg" class="cat cat2 catDance">
-<img src="cat3.jpg" class="cat cat3 catDance">
-<img src="cat4.jpg" class="cat cat4 catDance">
+<!-- CAT MEMES -->
+<img src="cat1.jpg" class="cat" style="top:10%; left:5%;">
+<img src="cat2.jpg" class="cat" style="top:20%; right:5%;">
+<img src="cat3.jpg" class="cat" style="bottom:10%; left:10%;">
+<img src="cat4.jpg" class="cat" style="bottom:15%; right:10%;">
 
-<div class="popup" id="popup">
-<p id="popupText"></p>
-<img src="angrycat.jpg" width="220">
+<!-- POPUP -->
+<div id="popup" style="display:none; position:fixed; top:40%; left:50%; transform:translate(-50%, -50%); background: rgba(0,0,0,0.7); color:white; padding:20px; border-radius:15px; text-align:center;">
+  <p id="popupText" style="font-size:18px;"></p>
+  <img id="popupCat" src="angrycat.jpg" style="width:180px; display:none; margin-top:10px;">
 </div>
 
-<div id="messagePage">
-<div class="messageCard">
+<!-- HIDDEN JASMINE QUOTE -->
+<div id="jasmineQuote">“Jasmine blooms even in the quietest corners.” 🌼</div>
+
+<!-- MESSAGE CARD -->
+<div class="messageCard" id="messageCard">
 <h2>Happy Valentine’s Day Shoonkey</h2>
 <p>
-I know we’re not big on labels, and this aint the typical “Valentine’s Day” type. But I still wanted to take a second to say I appreciate you.
-<br><br>
-Distance isn’t always easy, and whatever this is that we have isn’t always simple either. But you make it feel steady. You make it feel natural. I don’t ever feel like I’m forcing anything with you, and that’s rare.
-<br><br>
-I appreciate how you show up. How you listen. How you care in quiet ways. How you’re patient with me. You don’t make things dramatic. You just… stay. And that means more than you probably realize.
-<br><br>
-You’ve become a constant in my days. Not loud, not overwhelming, just solid. And I’m grateful for that.
-<br><br>
-So yeah. No big speeches. No cheesy lines.
-<br><br>
-Just thank you, for being you, and for choosing to be here with me, even from miles away.
-<br><br>
+I know we’re not big on labels, and this aint the typical “Valentine’s Day” type. But I still wanted to take a second to say I appreciate you.<br><br>
+Distance isn’t always easy, and whatever this is that we have isn’t always simple either. But you make it feel steady. You make it feel natural. I don’t ever feel like I’m forcing anything with you, and that’s rare.<br><br>
+I appreciate how you show up. How you listen. How you care in quiet ways. How you’re patient with me. You don’t make things dramatic. You just… stay. And that means more than you probably realize.<br><br>
+You’ve become a constant in my days. Not loud, not overwhelming, just solid. And I’m grateful for that.<br><br>
+So yeah. No big speeches. No cheesy lines.<br><br>
+Just thank you, for being you, and for choosing to be here with me, even from miles away.<br><br>
 — Lloyd
 </p>
 </div>
-</div>
-
-<!-- Hidden jasmine quote -->
-<div id="jasmineQuote">“Jasmine blooms even in the quietest corners.” 🌼</div>
 
 <audio id="romanticMusic" src="infatuated.mp3"></audio>
-<audio id="sadMusic" src="infatuated.mp3"></audio>
-
-<canvas id="confetti"></canvas>
 
 <script>
 let exitClicks = 0;
-const exitBtn = document.getElementById("exitBtn");
-const popup = document.getElementById("popup");
-const popupText = document.getElementById("popupText");
-const sadMusic = document.getElementById("sadMusic");
-const romanticMusic = document.getElementById("romanticMusic");
-const jasmineQuote = document.getElementById("jasmineQuote");
-const loadingScreen = document.getElementById("loadingScreen");
-const mainTitle = document.getElementById("mainTitle");
 
-/* Fake loading screen */
-setTimeout(()=>loadingScreen.style.display="none",2000);
+const exitBtn = document.getElementById('exitBtn');
+const continueBtn = document.getElementById('continueBtn');
+const popup = document.getElementById('popup');
+const popupText = document.getElementById('popupText');
+const popupCat = document.getElementById('popupCat');
+const messageCard = document.getElementById('messageCard');
+const romanticMusic = document.getElementById('romanticMusic');
+const cats = document.querySelectorAll('.cat');
+const jasmineQuote = document.getElementById('jasmineQuote');
 
-/* Floating strawberries */
-for(let i=0;i<15;i++){
-    let s=document.createElement("div");
-    s.className="strawberry";
-    s.innerHTML="🍓";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=(5+Math.random()*5)+"s";
-    document.body.appendChild(s);
+// FLOATING FRUITS
+function createFloatingFruit(emoji){
+  let f = document.createElement('div');
+  f.className = 'floating';
+  f.innerText = emoji;
+  f.style.left = Math.random()*100 + 'vw';
+  f.style.animationDuration = (5+Math.random()*5)+'s';
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),8000);
 }
 
-/* Falling petals */
-for(let i=0;i<10;i++){
-    let p=document.createElement("div");
-    p.className="petal";
-    p.innerHTML="🌹";
-    p.style.left=Math.random()*100+"vw";
-    p.style.animationDuration=(6+Math.random()*6)+"s";
-    document.body.appendChild(p);
-}
-
-/* Exit button chaos + heartbeat sync */
-exitBtn.addEventListener("click", function() {
-    exitClicks++;
-    if(exitClicks <=2){
-        popupText.innerText = exitClicks===1?"shoon...":"at least look at it...";
-        popup.style.display="block";
-        setTimeout(()=>popup.style.display="none",1500);
-    }
-    else if(exitClicks <=4){
-        exitBtn.style.position="absolute";
-        exitBtn.style.top=Math.random()*80 + "%";
-        exitBtn.style.left=Math.random()*80 + "%";
-        document.body.style.animation="heartbeat 0.5s infinite";
-        sadMusic.play();
-    }
-    else{
-        popupText.innerText="beach go back right now!";
-        popup.style.display="block";
-        sadMusic.play();
-    }
+// EXIT BUTTON BEHAVIOR
+exitBtn.addEventListener('click', ()=>{
+  exitClicks++;
+  if(exitClicks === 1){
+    popupText.innerText = "shoon...";
+    popupCat.style.display = "none";
+    popup.style.display = 'block';
+    setTimeout(()=>popup.style.display='none',1500);
+  } else if(exitClicks === 2){
+    popupText.innerText = "at least look at it...";
+    popupCat.style.display = "none";
+    popup.style.display = 'block';
+    setTimeout(()=>popup.style.display='none',1500);
+  } else if(exitClicks === 3){
+    popupText.innerText = "beach go back right now!";
+    popupCat.style.display = "block";
+    popup.style.display = 'block';
+    // move button randomly
+    exitBtn.style.top = Math.random()*70 + '%';
+    exitBtn.style.left = Math.random()*70 + '%';
+  }
 });
 
-/* Continue button */
-document.getElementById("continueBtn").addEventListener("click", function() {
-    document.body.innerHTML = document.getElementById("messagePage").innerHTML;
-    romanticMusic.play();
-    startConfetti();
-    strawberryDurianRain();
+// CONTINUE BUTTON
+continueBtn.addEventListener('click', ()=>{
+  messageCard.style.display = 'block';
+  romanticMusic.play();
+
+  // Floating strawberries, mango, roses
+  for(let i=0;i<15;i++){
+    let e = ['🍓','🥭','🌹'][Math.floor(Math.random()*3)];
+    createFloatingFruit(e);
+  }
 });
 
-/* Cat click easter egg */
-const cats = document.querySelectorAll(".cat");
-cats.forEach((cat)=>{
-    cat.addEventListener("click",()=>{
-        alert("Meow! You found a secret cat! 🐱");
-        jasmineQuote.style.display="block";
-        setTimeout(()=>jasmineQuote.style.display="none",4000);
-    });
+// CAT EASTER EGGS
+cats.forEach(cat=>{
+  cat.addEventListener('click', ()=>{
+    jasmineQuote.style.display='block';
+    setTimeout(()=>jasmineQuote.style.display='none',4000);
+    alert("Meow! You found a secret cat! 🐱");
+  });
 });
-
-/* Confetti for strawberries */
-function startConfetti() {
-    const canvas = document.getElementById('confetti');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const ctx = canvas.getContext('2d');
-    const confetti = [];
-    for(let i=0;i<150;i++){
-        confetti.push({
-            x:Math.random()*canvas.width,
-            y:Math.random()*canvas.height,
-            r:Math.random()*6+4,
-            d:Math.random()*150+50,
-            color:`hsl(${Math.random()*360},100%,75%)`,
-            tilt:Math.random()*10-10,
-            tiltAngleIncremental:Math.random()*0.07+0.05
-        });
-    }
-    function draw(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        confetti.forEach((c)=>{
-            ctx.beginPath();
-            ctx.lineWidth = c.r/2;
-            ctx.strokeStyle = c.color;
-            ctx.moveTo(c.x + c.tilt + c.r/4, c.y);
-            ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r/2);
-            ctx.stroke();
-        });
-        update();
-    }
-    function update(){
-        confetti.forEach((c)=>{
-            c.tiltAngle += c.tiltAngleIncremental;
-            c.y += (Math.cos(c.d) + 3 + c.r/2)/2;
-            c.tilt = Math.sin(c.tiltAngle) * 15;
-            if(c.y > canvas.height){ c.y = -10; c.x = Math.random()*canvas.width;}
-        });
-        requestAnimationFrame(draw);
-    }
-    draw();
-}
-
-/* Strawberry + durian rain */
-function strawberryDurianRain(){
-    for(let i=0;i<30;i++){
-        let s=document.createElement("div");
-        s.className="strawberry";
-        s.style.left=Math.random()*100+"vw";
-        s.style.top="-5vh";
-        s.innerHTML=Math.random()<0.7?"🍓":"🥭";
-        s.style.fontSize=(20+Math.random()*20)+"px";
-        s.style.animation="float 5s linear forwards";
-        document.body.appendChild(s);
-        setTimeout(()=>s.remove(),6000);
-    }
-}
-
-/* Durian easter egg: click title 3 times */
-let titleClicks=0;
-mainTitle.addEventListener("click", ()=>{
-    titleClicks++;
-    if(titleClicks===3){
-        alert("You found the durian 🥭💀");
-        mainTitle.innerText="💖💀💖💀💖";
-    }
-});
-
-/* Wine red night mode toggle every 10s for chaotic effect */
-setInterval(()=>{
-    document.body.style.background = document.body.style.background.includes('#5c0011')?
-        'linear-gradient(180deg,#330011,#ffb6c1)':
-        'linear-gradient(180deg,#ffb6c1,#5c0011)';
-},10000);
 </script>
 
 </body>
