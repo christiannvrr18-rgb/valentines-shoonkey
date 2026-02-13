@@ -2,231 +2,239 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For Shoonkey ❤️</title>
+<title>For Shoonkey 💌</title>
 
 <style>
 body{
-    margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background:#ffc1cc;
-    text-align:center;
-    color:#5a0010;
-    overflow:hidden;
+  margin:0;
+  font-family: 'Georgia', serif;
+  background:#ffd6e8;
+  text-align:center;
+  overflow:hidden;
 }
 
 .slide{
-    display:none;
-    padding:60px 20px;
+  display:none;
+  padding:60px 20px;
 }
 
 .active{
-    display:block;
+  display:block;
+  animation:fade 0.8s ease-in-out;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 h1{
-    font-size:3em;
-    background: linear-gradient(45deg,#fff,#ff4d6d,#fff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:glow 2s infinite alternate;
+  font-size:48px;
+  color:#7b001c;
 }
 
-@keyframes glow{
-    from{ text-shadow:0 0 5px #ff9bb3;}
-    to{ text-shadow:0 0 20px #ff4d6d;}
+h2{
+  font-size:34px;
+}
+
+p{
+  font-size:22px;
+  max-width:700px;
+  margin:auto;
+  line-height:1.6;
 }
 
 button{
-    padding:12px 28px;
-    margin:15px;
-    border:none;
-    border-radius:30px;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.3s ease;
+  padding:14px 28px;
+  font-size:20px;
+  border:none;
+  border-radius:30px;
+  margin:15px;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-button:hover{
-    transform:scale(1.05);
+.next{
+  background:#ff4d6d;
+  color:white;
 }
 
-#nextBtn{
-    background:#8b0000;
-    color:white;
+.exit{
+  background:#b3003c;
+  color:white;
 }
 
-#exitBtn{
-    background:#ff69b4;
-    color:white;
+.cat{
+  width:250px;
+  margin:20px;
+  border-radius:20px;
 }
 
-img{
-    max-width:250px;
-    border-radius:15px;
-    margin:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+.glitter{
+  position:fixed;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  background-image:radial-gradient(white 1px, transparent 1px);
+  background-size:20px 20px;
+  animation:glow 4s linear infinite;
+  opacity:0.3;
 }
 
-.messageCard{
-    max-width:700px;
-    margin:30px auto;
-    background:rgba(255,255,255,0.7);
-    padding:30px;
-    border-radius:20px;
-    backdrop-filter:blur(10px);
-    line-height:1.7em;
-    box-shadow:0 15px 40px rgba(0,0,0,0.2);
-}
-
-.floating{
-    position:absolute;
-    font-size:24px;
-    animation:float 8s linear infinite;
-}
-
-@keyframes float{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-10vh);}
+@keyframes glow{
+  from{background-position:0 0;}
+  to{background-position:200px 200px;}
 }
 </style>
 </head>
 
 <body>
 
+<div class="glitter"></div>
+
+<audio id="bgMusic" src="hotline.mp3" autoplay loop></audio>
+
 <!-- SLIDE 1 -->
-<div class="slide active" id="slide1">
-<h1>Happy Valentine’s Day Shoonkey ❤️</h1>
-<button id="nextBtn">Yes</button>
-<button id="exitBtn">Exit</button>
+<div class="slide active">
+  <h1>Happy Valentine’s Day Shoonkey 💘</h1>
+  <img class="cat" src="cat1.jpg">
+  <br>
+  <button class="next" onclick="nextSlide()">Next</button>
+  <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
 <!-- SLIDE 2 -->
-<div class="slide" id="slide2">
-<img src="bouquet.jpg">
-<p>Flowers for m’lady.</p>
-<p>I got you roses and jasmine since I know you love them.</p>
-<button onclick="nextSlide()">Next</button>
+<div class="slide">
+  <h2>Flowers for m’lady 🌹</h2>
+  <p>I got you roses and jasmines since I know you love them.</p>
+  <img src="bouquet.jpg" width="300">
+  <img class="cat" src="cat2.jpg">
+  <br>
+  <button class="next" onclick="nextSlide()">Next</button>
+  <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
 <!-- SLIDE 3 -->
-<div class="slide" id="slide3">
-<p>Wanna buy some fruits?</p>
-<button onclick="nextSlide()">Next</button>
+<div class="slide">
+  <h2>Wanna buy some fruits? 🍓🥭</h2>
+  <p>Here, I bought you strawberries, mangoes, and durian.</p>
+  <img src="strawberry.jpg" width="200">
+  <img src="mango.jpg" width="200">
+  <img src="durian.jpg" width="200">
+  <img class="cat" src="cat3.jpg">
+  <br>
+  <button class="next" onclick="nextSlide()">Next</button>
+  <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
 <!-- SLIDE 4 -->
-<div class="slide" id="slide4">
-<img src="strawberry.jpg">
-<img src="mango.jpg">
-<img src="durian.jpg">
-<p>Here, I bought you strawberries, mangoes, and durian.</p>
-<button onclick="nextSlide()">Next</button>
+<div class="slide">
+  <h2>Oh, didn’t you say you love this anime? 🎬</h2>
+  <p>What a coincidence!</p>
+  <img src="love_through_prism.jpg" width="300">
+  <img class="cat" src="cat4.jpg">
+  <br>
+  <button class="next" onclick="nextSlide()">Next</button>
+  <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
 <!-- SLIDE 5 -->
-<div class="slide" id="slide5">
-<p>Wanna watch some Netflix?</p>
-<button onclick="nextSlide()">Next</button>
+<div class="slide">
+  <h2>I’m hungry… wanna eat? 🍛</h2>
+  <p>I made you some Burmese curry since that’s your favorite, right?</p>
+  <img src="burmese_curry.jpg" width="300">
+  <img class="cat" src="cat5.jpg">
+  <br>
+  <button class="next" onclick="nextSlide()">Next</button>
+  <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
 <!-- SLIDE 6 -->
-<div class="slide" id="slide6">
-<img src="loveprism.jpg">
-<p>Oh, didn’t you say you love this anime? What a coincidence!</p>
-<button onclick="nextSlide()">Next</button>
+<div class="slide">
+  <h2>Oh… one more thing 💭</h2>
+  <img class="cat" src="cat6.jpg">
+  <br>
+  <button class="next" onclick="finalSlide()">Next</button>
+  <button class="exit" onclick="exitPressed()">Exit</button>
 </div>
 
-<!-- SLIDE 7 -->
-<div class="slide" id="slide7">
-<p>I’m hungry. Wanna eat?</p>
-<button onclick="nextSlide()">Next</button>
+<!-- FINAL MESSAGE -->
+<div class="slide">
+  <h2>Happy Valentine’s Day Shoonkey ❤️</h2>
+  <p>
+  I know we’re not big on labels, and this isn’t the typical “Valentine’s Day” situation.  
+  But I still wanted to take a moment to tell you how much I appreciate you.  
+
+  Distance isn’t always easy, and whatever this is that we have isn’t always simple either.  
+  But you make it feel steady. You make it feel natural.  
+
+  I never feel like I’m forcing anything with you — and that’s rare.  
+
+  I appreciate how you show up. How you listen.  
+  How you care in quiet ways.  
+  How patient you are with me.  
+
+  You don’t make things dramatic. You just… stay.  
+  And that means more than you probably realize.  
+
+  You’ve become a constant in my days.  
+  Not loud. Not overwhelming. Just solid.  
+
+  And I’m grateful for that.  
+
+  So yeah. No big speeches. No cheesy lines.  
+
+  Just thank you — for being you,  
+  and for choosing to be here with me,  
+  even from miles away.  
+
+  Happy Valentine’s Day.  
+
+  – Lloyd
+  </p>
+  <img class="cat" src="cat7.jpg">
 </div>
-
-<!-- SLIDE 8 -->
-<div class="slide" id="slide8">
-<img src="burmesecurry.jpg">
-<p>I made you some Burmese curry since that’s your favorite, right?</p>
-<button onclick="nextSlide()">Next</button>
-</div>
-
-<!-- SLIDE 9 -->
-<div class="slide" id="slide9">
-<p>Oh… one more thing.</p>
-<button onclick="nextSlide()">Next</button>
-</div>
-
-<!-- SLIDE 10 FINAL -->
-<div class="slide" id="slide10">
-<div class="messageCard">
-<h2>Happy Valentine’s Day Shoonie<3</h2>
-<p>
-I know we’re not big on labels, and this isn’t the typical “Valentine’s Day” type of thing. But I still wanted to take a moment to tell you how much I appreciate you.<br><br>
-
-Distance isn’t always easy, and whatever this is that we have isn’t always simple either. But you make it feel steady. You make it feel natural. I never feel like I’m forcing anything with you, and that’s rare.<br><br>
-
-I appreciate how you show up. How you listen. How you care in quiet ways. How you’re patient with me. You don’t make things dramatic. You just… stay. And that means more than you probably realize.<br><br>
-
-You’ve become a constant in my days. Not loud, not overwhelming — just solid. And I’m grateful for that.<br><br>
-
-So yeah. No big speeches. No cheesy lines.<br><br>
-
-Just thank you for being you, and for choosing to be here with me, even from miles away.<br><br>
-
-— Lloyd
-</p>
-</div>
-</div>
-
-<audio id="song1" src="hotlinebling.mp3"></audio>
-<audio id="song2" src="infatuated.mp3"></audio>
 
 <script>
-let current=1;
-let exitClicks=0;
-
-const nextBtn=document.getElementById("nextBtn");
-const exitBtn=document.getElementById("exitBtn");
-
-function showSlide(n){
-    document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
-    document.getElementById("slide"+n).classList.add("active");
-}
+let currentSlide = 0;
+let exitCount = 0;
+let slides = document.querySelectorAll(".slide");
+let nextButtons = document.querySelectorAll(".next");
+let exitButtons = document.querySelectorAll(".exit");
+let music = document.getElementById("bgMusic");
 
 function nextSlide(){
-    current++;
-    showSlide(current);
-
-    if(current===10){
-        document.getElementById("song1").play();
-        setTimeout(()=>{
-            document.getElementById("song1").pause();
-            document.getElementById("song2").play();
-        },15000);
-
-        floatingFruits();
-    }
+  slides[currentSlide].classList.remove("active");
+  currentSlide++;
+  slides[currentSlide].classList.add("active");
 }
 
-nextBtn.onclick=nextSlide;
+function finalSlide(){
+  slides[currentSlide].classList.remove("active");
+  currentSlide++;
+  slides[currentSlide].classList.add("active");
 
-exitBtn.onclick=function(){
-    exitClicks++;
-    if(exitClicks===3){
-        exitBtn.style.display="none";
-    }
+  music.src="infatuated.mp3";
+  music.play();
 }
 
-function floatingFruits(){
-    for(let i=0;i<25;i++){
-        let e=['🍓','🥭','🌹'][Math.floor(Math.random()*3)];
-        let f=document.createElement("div");
-        f.className="floating";
-        f.innerText=e;
-        f.style.left=Math.random()*100+"vw";
-        f.style.animationDuration=(5+Math.random()*5)+"s";
-        document.body.appendChild(f);
-        setTimeout(()=>f.remove(),8000);
-    }
+function exitPressed(){
+  exitCount++;
+
+  alert("Shoon...");
+
+  if(exitCount==2){
+    alert("At least look at it...");
+  }
+
+  if(exitCount>=3){
+    alert("Beach please go back right now 😾");
+    exitButtons.forEach(btn=>btn.style.display="none");
+  }
+
+  nextButtons.forEach(btn=>{
+    btn.style.transform="scale("+(1 + exitCount*0.1)+")";
+  });
 }
 </script>
 
