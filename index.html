@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For Shoonkey 💌</title>
+<title>For Shoonie 💌</title>
 
 <style>
 body{
@@ -29,17 +29,17 @@ body{
 }
 
 h1{
-  font-size:60px; /* bigger */
-  color:#7b001c; /* dark wine red */
+  font-size:60px;
+  color:#7b001c;
   margin-bottom:20px;
 }
 
 h2{
-  font-size:46px; /* bigger */
+  font-size:46px;
 }
 
 p{
-  font-size:28px; /* bigger */
+  font-size:28px;
   max-width:700px;
   margin:auto;
   line-height:1.6;
@@ -47,7 +47,7 @@ p{
 
 button{
   padding:14px 28px;
-  font-size:22px; /* slightly bigger */
+  font-size:22px;
   border:none;
   border-radius:30px;
   margin:15px;
@@ -63,6 +63,18 @@ button{
 .exit{
   background:#b3003c;
   color:white;
+}
+
+.exit.shake{
+  animation: shake 0.5s;
+}
+
+@keyframes shake{
+  0%{transform: translateX(0);}
+  25%{transform: translateX(-5px);}
+  50%{transform: translateX(5px);}
+  75%{transform: translateX(-5px);}
+  100%{transform: translateX(0);}
 }
 
 .cat{
@@ -99,11 +111,11 @@ button{
 
 <!-- SLIDE 1 -->
 <div class="slide active">
-  <h1>Happy Valentine’s Day Shoon 💘</h1>
+  <h1>Happy Valentine’s Day Shoonie 💘</h1>
   <img class="cat" src="cat1.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
-  <button class="exit" onclick="exitPressed()">Exit</button>
+  <button class="exit" onclick="exitPressed(this)">Exit</button>
 </div>
 
 <!-- SLIDE 2 -->
@@ -114,7 +126,7 @@ button{
   <img class="cat" src="cat2.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
-  <button class="exit" onclick="exitPressed()">Exit</button>
+  <button class="exit" onclick="exitPressed(this)">Exit</button>
 </div>
 
 <!-- SLIDE 3 -->
@@ -127,7 +139,7 @@ button{
   <img class="cat" src="cat3.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
-  <button class="exit" onclick="exitPressed()">Exit</button>
+  <button class="exit" onclick="exitPressed(this)">Exit</button>
 </div>
 
 <!-- SLIDE 4 -->
@@ -138,7 +150,7 @@ button{
   <img class="cat" src="cat4.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
-  <button class="exit" onclick="exitPressed()">Exit</button>
+  <button class="exit" onclick="exitPressed(this)">Exit</button>
 </div>
 
 <!-- SLIDE 5 -->
@@ -149,7 +161,7 @@ button{
   <img class="cat" src="cat5.jpg">
   <br>
   <button class="next" onclick="nextSlide()">Next</button>
-  <button class="exit" onclick="exitPressed()">Exit</button>
+  <button class="exit" onclick="exitPressed(this)">Exit</button>
 </div>
 
 <!-- SLIDE 6 -->
@@ -158,14 +170,15 @@ button{
   <img class="cat" src="cat6.jpg">
   <br>
   <button class="next" onclick="finalSlide()">Next</button>
-  <button class="exit" onclick="exitPressed()">Exit</button>
+  <button class="exit" onclick="exitPressed(this)">Exit</button>
 </div>
 
 <!-- FINAL MESSAGE -->
 <div class="slide">
-  <h2>Happy Valentine’s Day my Shoonie ❤️</h2>
+  <h2>Happy Valentine’s Day my Shoonkey ❤️</h2>
   <p>
-  I know this isn’t the typical “Valentine’s Day” gift.  
+    
+  I know this isn’t the typical “Valentine’s Day” situation.  
   But I still wanted to take a moment to tell you how much I appreciate you.  
 
   Distance isn’t always easy, and whatever this is that we have isn’t always simple either.  
@@ -187,13 +200,14 @@ button{
 
   So yeah. No big speeches. No cheesy lines.  
 
-  Just thank you, for being you,  
+  Just thank you for being you,  
   and for choosing to be here with me,  
   even from miles away.  
 
-  Happy Valentine’s Day.  
+  Happy Valentine’s Day.
+    oh and btw, try listening to the whole music.
 
-  – the GOAT Lalloyd
+  – yo boi Lloyd
   </p>
   <img class="cat" src="cat7.jpg">
 </div>
@@ -231,22 +245,30 @@ function finalSlide(){
   music.play();
 }
 
-function exitPressed(){
+function exitPressed(btn){
   startMusic();
-
   exitCount++;
+
+  // shake button for first 3 presses
+  if(exitCount <= 3){
+    btn.classList.add("shake");
+    setTimeout(()=>{ btn.classList.remove("shake"); }, 500);
+  }
 
   if(exitCount==1){
     alert("Shoon...");
   } else if(exitCount==2){
     alert("At least look at it...");
-  } else if(exitCount>=3){
+  } else if(exitCount==3){
     alert("Beach please go back right now 😾");
-    exitButtons.forEach(btn=>btn.style.display="none");
+  } else if(exitCount==4){
+    alert("THAT'S IT. IM REMOVING THIS BUTTON");
+    exitButtons.forEach(b=>b.style.display="none");
   }
 
-  nextButtons.forEach(btn=>{
-    btn.style.transform="scale("+(1 + exitCount*0.1)+")";
+  // grow all next buttons slightly each time exit pressed
+  nextButtons.forEach(b=>{
+    b.style.transform="scale("+(1 + exitCount*0.1)+")";
   });
 }
 </script>
